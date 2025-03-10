@@ -1,26 +1,136 @@
+/* General Styles */
 .resume-template {
   max-width: 900px;
-  margin: auto;
+  margin: 20px auto;
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  color: #333;
 }
 
+/* Logo Styles */
 .resume-logo {
   max-width: 120px;
   display: block;
-  margin: auto;
+  margin: 20px auto;
 }
 
+/* Section Background */
 .bg-light {
   background-color: #f8f9fa !important;
   border-right: 2px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
 }
 
+/* Headings */
 h5 {
   color: #0056b3;
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
+h4 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Text Styles */
 .text-muted {
   font-size: 0.9rem;
+  color: #6c757d !important;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .resume-template {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .resume-logo {
+    max-width: 100px;
+  }
+
+  h5 {
+    font-size: 1.1rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+
+  .bg-light {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .resume-template {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  .resume-logo {
+    max-width: 80px;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  .bg-light {
+    padding: 8px;
+  }
+}
+
+/* Utility Classes */
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Custom Styles for Resume Sections */
+.resume-section {
+  margin-bottom: 20px;
+}
+
+.resume-section:last-child {
+  margin-bottom: 0;
+}
+
+.resume-section h5 {
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 5px;
+}
+
+.resume-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.resume-section ul li {
+  margin-bottom: 10px;
+}
+
+.resume-section ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Add more custom styles as needed */

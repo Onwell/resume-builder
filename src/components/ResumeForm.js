@@ -1,4 +1,5 @@
 import React from "react";
+import './ResumeTemplate.css'; // Import your CSS file
 
 const ResumeForm = ({ formData, setFormData }) => {
   const handleChange = (e) => {
@@ -9,6 +10,24 @@ const ResumeForm = ({ formData, setFormData }) => {
   const handleArrayChange = (e, field) => {
     const newArray = e.target.value.split("\n"); // Split textarea values into an array
     setFormData({ ...formData, [field]: newArray });
+  };
+
+  // Function to add a new education entry
+  const addEducation = () => {
+    setFormData({
+      ...formData,
+      education: [
+        ...formData.education,
+        { school: "", level: "", startYear: "", endYear: "" },
+      ],
+    });
+  };
+
+  // Function to update education fields
+  const updateEducation = (index, field, value) => {
+    const updatedEducation = [...formData.education];
+    updatedEducation[index][field] = value;
+    setFormData({ ...formData, education: updatedEducation });
   };
 
   // Function to add a new experience entry
@@ -91,27 +110,46 @@ const ResumeForm = ({ formData, setFormData }) => {
         />
       </div>
 
-      {/* Education */}
+      {/* Education Section */}
       <div className="mb-3">
         <label className="form-label">Education</label>
-        <input
-          type="text"
-          className="form-control"
-          name="education"
-          value={formData.education}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label">GPA</label>
-        <input
-          type="text"
-          className="form-control"
-          name="gpa"
-          value={formData.gpa}
-          onChange={handleChange}
-        />
+        {(formData.education || []).map((edu, index) => (
+          <div key={index} className="border p-2 mb-2 rounded">
+            <input
+              type="text"
+              className="form-control mb-2"
+              placeholder="School Name"
+              value={edu.school}
+              onChange={(e) => updateEducation(index, "school", e.target.value)}
+            />
+            <input
+              type="text"
+              className="form-control mb-2"
+              placeholder="Level (e.g., Bachelor's, High School)"
+              value={edu.level}
+              onChange={(e) => updateEducation(index, "level", e.target.value)}
+            />
+            <input
+              type="number"
+              className="form-control mb-2"
+              placeholder="Start Year"
+              value={edu.startYear}
+              onChange={(e) =>
+                updateEducation(index, "startYear", e.target.value)
+              }
+            />
+            <input
+              type="number"
+              className="form-control mb-2"
+              placeholder="End Year"
+              value={edu.endYear}
+              onChange={(e) => updateEducation(index, "endYear", e.target.value)}
+            />
+          </div>
+        ))}<br />
+        <button className="btn btn-primary mt-2 responsive-button" onClick={addEducation}>
+          Add Education
+        </button>
       </div>
 
       {/* Achievements */}
@@ -139,63 +177,47 @@ const ResumeForm = ({ formData, setFormData }) => {
       {/* Experience Section */}
       <div className="mb-3">
         <label className="form-label">Experience</label>
-        {formData.experience.map((exp, index) => (
+        {(formData.experience || []).map((exp, index) => (
           <div key={index} className="border p-2 mb-2 rounded">
-            <div className="mb-2">
-              <label className="form-label">Job Title</label>
-              <input
-                type="text"
-                className="form-control"
-                value={exp.title}
-                onChange={(e) => updateExperience(index, "title", e.target.value)}
-              />
-            </div>
-
-            <div className="mb-2">
-              <label className="form-label">Company</label>
-              <input
-                type="text"
-                className="form-control"
-                value={exp.company}
-                onChange={(e) => updateExperience(index, "company", e.target.value)}
-              />
-            </div>
-
-            <div className="mb-2">
-              <label className="form-label">Start Date</label>
-              <input
-                type="date"
-                className="form-control"
-                value={exp.startDate}
-                onChange={(e) => updateExperience(index, "startDate", e.target.value)}
-              />
-            </div>
-
-            <div className="mb-2">
-              <label className="form-label">End Date</label>
-              <input
-                type="date"
-                className="form-control"
-                value={exp.endDate}
-                onChange={(e) => updateExperience(index, "endDate", e.target.value)}
-              />
-            </div>
+            <input
+              type="text"
+              className="form-control mb-2"
+              placeholder="Job Title"
+              value={exp.title}
+              onChange={(e) =>
+                updateExperience(index, "title", e.target.value)
+              }
+            />
+            <input
+              type="text"
+              className="form-control mb-2"
+              placeholder="Company"
+              value={exp.company}
+              onChange={(e) =>
+                updateExperience(index, "company", e.target.value)
+              }
+            />
+            <input
+              type="date"
+              className="form-control mb-2"
+              placeholder="Start Date"
+              value={exp.startDate}
+              onChange={(e) =>
+                updateExperience(index, "startDate", e.target.value)
+              }
+            />
+            <input
+              type="date"
+              className="form-control mb-2"
+              placeholder="End Date"
+              value={exp.endDate}
+              onChange={(e) => updateExperience(index, "endDate", e.target.value)}
+            />
           </div>
-        ))}
+        ))}<br />
         <button className="btn btn-primary mt-2" onClick={addExperience}>
           Add Experience
         </button>
-      </div>
-
-      {/* References */}
-      <div className="mb-3">
-        <label className="form-label">References (one per line: Name - Contact)</label>
-        <textarea
-          className="form-control"
-          rows="3"
-          value={formData.references.map((ref) => `${ref.name} - ${ref.contact}`).join("\n")}
-          onChange={(e) => handleArrayChange(e, "references")}
-        />
       </div>
     </div>
   );
